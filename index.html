@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAV – Download the App</title>
+    <meta name="description"
+        content="Download the CRAV app for Android. Order food seamlessly with dine-in, takeaway, and delivery options.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f0a07;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --accent: #ea580c;
+            --accent-light: #fb923c;
+            --accent-glow: rgba(234, 88, 12, 0.35);
+            --coral: #f59e0b;
+            --text: #f5f0eb;
+            --text-muted: #a8a09a;
+            --radius: 20px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ─── Animated background blobs ─── */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-glow span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: .45;
+        }
+
+        .bg-glow .blob1 {
+            width: 520px;
+            height: 520px;
+            background: #ea580c;
+            top: -10%;
+            left: -8%;
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+
+        .bg-glow .blob2 {
+            width: 440px;
+            height: 440px;
+            background: #f59e0b;
+            bottom: -12%;
+            right: -6%;
+            animation: drift 22s ease-in-out infinite alternate-reverse;
+        }
+
+        .bg-glow .blob3 {
+            width: 300px;
+            height: 300px;
+            background: #dc2626;
+            top: 50%;
+            left: 55%;
+            animation: drift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(40px, -30px) scale(1.08);
+            }
+
+            100% {
+                transform: translate(-20px, 20px) scale(.95);
+            }
+        }
+
+        /* ─── Main wrapper ─── */
+        .page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 720px;
+            padding: 60px 24px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 48px;
+            min-height: 100vh;
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            text-align: center;
+        }
+
+        .brand {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, var(--accent-light), var(--coral));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            animation: fadeDown .8s ease-out both;
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            max-width: 440px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: fadeDown 1s ease-out .15s both;
+        }
+
+        /* ─── Download card ─── */
+        .download-card {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            backdrop-filter: blur(24px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            animation: fadeUp .9s ease-out .25s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+        }
+
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--accent), var(--coral));
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+
+        .card-icon svg {
+            width: 34px;
+            height: 34px;
+            fill: #fff;
+        }
+
+        .card-info {
+            text-align: center;
+        }
+
+        .card-info h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card-info p {
+            color: var(--text-muted);
+            font-size: .9rem;
+        }
+
+        .file-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .meta-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .82rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 14px;
+            border-radius: 999px;
+        }
+
+        .meta-tag svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent-light);
+        }
+
+        /* ─── CTA Button ─── */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 44px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), #c2410c);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform .2s ease, box-shadow .3s ease;
+            box-shadow: 0 4px 24px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-download::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .15), transparent);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 40px var(--accent-glow);
+        }
+
+        .btn-download:hover::after {
+            opacity: 1;
+        }
+
+        .btn-download:active {
+            transform: scale(.98);
+        }
+
+        .btn-download svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-download span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── Features strip ─── */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+            animation: fadeUp 1s ease-out .45s both;
+        }
+
+        .feature {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 24px 16px;
+            text-align: center;
+            backdrop-filter: blur(16px);
+            transition: border-color .3s, transform .3s;
+        }
+
+        .feature:hover {
+            border-color: rgba(234, 88, 12, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            font-size: .88rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .feature p {
+            font-size: .75rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* ─── Install steps ─── */
+        .steps {
+            width: 100%;
+            animation: fadeUp 1s ease-out .55s both;
+        }
+
+        .steps h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .steps-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 16px 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--coral));
+            display: grid;
+            place-items: center;
+            font-size: .78rem;
+            font-weight: 700;
+        }
+
+        .step-text {
+            font-size: .88rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            padding-top: 4px;
+        }
+
+        .step-text strong {
+            color: var(--text);
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            margin-top: auto;
+            padding: 24px;
+            text-align: center;
+            font-size: .78rem;
+            color: rgba(255, 255, 255, 0.25);
+            animation: fadeUp 1s ease-out .65s both;
+        }
+
+        /* ─── Animations ─── */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 600px) {
+            .brand {
+                font-size: 2.8rem;
+                letter-spacing: 4px;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .download-card {
+                padding: 28px 20px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-download {
+                padding: 14px 32px;
+                font-size: .95rem;
+            }
+
+            .page {
+                padding: 40px 16px 32px;
+                gap: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated background -->
+    <div class="bg-glow">
+        <span class="blob1"></span>
+        <span class="blob2"></span>
+        <span class="blob3"></span>
+    </div>
+
+    <div class="page">
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1 class="brand">CRAV</h1>
+            <p class="tagline">Your ultimate food ordering experience — dine-in, takeaway &amp; delivery, all in one
+                app.</p>
+        </section>
+
+        <!-- Download Card -->
+        <section class="download-card">
+            <div class="card-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M17.523 2H6.477A2.48 2.48 0 0 0 4 4.477v15.046A2.48 2.48 0 0 0 6.477 22h11.046A2.48 2.48 0 0 0 20 19.523V4.477A2.48 2.48 0 0 0 17.523 2ZM12 18.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm4-4H8V5h8v9.5Z" />
+                </svg>
+            </div>
+            <div class="card-info">
+                <h2>CRAV for Android</h2>
+                <p>Version 1.0 &nbsp;•&nbsp; Android 7.0+</p>
+            </div>
+            <div class="file-meta">
+                <span class="meta-tag">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm-1 2 5 5h-5V4ZM6 20V4h5v7h7v9H6Z" />
+                    </svg>
+                    APK File
+                </span>
+                <span class="meta-tag">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 6H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1Zm-1 10H5V8h14v8Z" />
+                    </svg>
+                    ~113 MB
+                </span>
+                <span class="meta-tag">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm0 20a9 9 0 1 1 9-9 9 9 0 0 1-9 9Zm.5-14h-1v5.41l3.54 3.54.71-.71L12.5 12V7Z" />
+                    </svg>
+                    Latest Build
+                </span>
+            </div>
+            <a href="./CRAV1.apk" download class="btn-download" id="download-btn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 16l-6-6h4V4h4v6h4l-6 6Zm-8 2v2h16v-2H4Z" />
+                </svg>
+                <span>Download APK</span>
+            </a>
+            <!-- TIP: To bypass the 100MB limit, upload your APK to Google Drive/MediaFire and replace the href above with your link! -->
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">🍽️</div>
+                <h3>Dine-In</h3>
+                <p>Browse menus &amp; order at your table</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛍️</div>
+                <h3>Takeaway</h3>
+                <p>Order ahead &amp; pick up when ready</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Fast Delivery</h3>
+                <p>Get food delivered to your door</p>
+            </div>
+        </section>
+
+        <!-- Install Steps -->
+        <section class="steps">
+            <h2>How to Install</h2>
+            <ol class="steps-list">
+                <li>
+                    <span class="step-num">1</span>
+                    <span class="step-text"><strong>Download</strong> the APK by tapping the button above.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span class="step-text">Open your device <strong>Settings → Security</strong> and enable
+                        <strong>"Install from Unknown Sources"</strong>.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span class="step-text">Open the downloaded file and tap <strong>Install</strong>. You're all
+                        set!</span>
+                </li>
+            </ol>
+        </section>
+
+        <footer>
+            &copy; 2026 CRAV &nbsp;·&nbsp; All rights reserved
+        </footer>
+    </div>
+
+</body>
+
+</html>

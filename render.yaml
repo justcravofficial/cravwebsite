@@ -1,0 +1,10 @@
+services:
+  - type: static
+    name: crav-apk-landing
+    env: static
+    buildCommand: ""
+    publishPath: .
+    routes:
+      - type: rewrite
+        source: /
+        destination: /index.html
